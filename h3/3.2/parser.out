@@ -1,0 +1,200 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expr
+Rule 1     expr -> expr OR term
+Rule 2     expr -> expr AND term
+Rule 3     term -> NOT factor
+Rule 4     expr -> term
+Rule 5     term -> factor
+Rule 6     factor -> LPAREN expr RPAREN
+Rule 7     factor -> BOOLEAN
+
+Terminals, with rules where they appear
+
+AND                  : 2
+BOOLEAN              : 7
+LPAREN               : 6
+NOT                  : 3
+OR                   : 1
+RPAREN               : 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+expr                 : 1 2 6 0
+factor               : 3 5
+term                 : 1 2 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expr
+    (1) expr -> . expr OR term
+    (2) expr -> . expr AND term
+    (4) expr -> . term
+    (3) term -> . NOT factor
+    (5) term -> . factor
+    (6) factor -> . LPAREN expr RPAREN
+    (7) factor -> . BOOLEAN
+
+    NOT             shift and go to state 3
+    LPAREN          shift and go to state 5
+    BOOLEAN         shift and go to state 6
+
+    expr                           shift and go to state 1
+    term                           shift and go to state 2
+    factor                         shift and go to state 4
+
+state 1
+
+    (0) S' -> expr .
+    (1) expr -> expr . OR term
+    (2) expr -> expr . AND term
+
+    OR              shift and go to state 7
+    AND             shift and go to state 8
+
+
+state 2
+
+    (4) expr -> term .
+
+    OR              reduce using rule 4 (expr -> term .)
+    AND             reduce using rule 4 (expr -> term .)
+    $end            reduce using rule 4 (expr -> term .)
+    RPAREN          reduce using rule 4 (expr -> term .)
+
+
+state 3
+
+    (3) term -> NOT . factor
+    (6) factor -> . LPAREN expr RPAREN
+    (7) factor -> . BOOLEAN
+
+    LPAREN          shift and go to state 5
+    BOOLEAN         shift and go to state 6
+
+    factor                         shift and go to state 9
+
+state 4
+
+    (5) term -> factor .
+
+    OR              reduce using rule 5 (term -> factor .)
+    AND             reduce using rule 5 (term -> factor .)
+    $end            reduce using rule 5 (term -> factor .)
+    RPAREN          reduce using rule 5 (term -> factor .)
+
+
+state 5
+
+    (6) factor -> LPAREN . expr RPAREN
+    (1) expr -> . expr OR term
+    (2) expr -> . expr AND term
+    (4) expr -> . term
+    (3) term -> . NOT factor
+    (5) term -> . factor
+    (6) factor -> . LPAREN expr RPAREN
+    (7) factor -> . BOOLEAN
+
+    NOT             shift and go to state 3
+    LPAREN          shift and go to state 5
+    BOOLEAN         shift and go to state 6
+
+    expr                           shift and go to state 10
+    term                           shift and go to state 2
+    factor                         shift and go to state 4
+
+state 6
+
+    (7) factor -> BOOLEAN .
+
+    OR              reduce using rule 7 (factor -> BOOLEAN .)
+    AND             reduce using rule 7 (factor -> BOOLEAN .)
+    $end            reduce using rule 7 (factor -> BOOLEAN .)
+    RPAREN          reduce using rule 7 (factor -> BOOLEAN .)
+
+
+state 7
+
+    (1) expr -> expr OR . term
+    (3) term -> . NOT factor
+    (5) term -> . factor
+    (6) factor -> . LPAREN expr RPAREN
+    (7) factor -> . BOOLEAN
+
+    NOT             shift and go to state 3
+    LPAREN          shift and go to state 5
+    BOOLEAN         shift and go to state 6
+
+    term                           shift and go to state 11
+    factor                         shift and go to state 4
+
+state 8
+
+    (2) expr -> expr AND . term
+    (3) term -> . NOT factor
+    (5) term -> . factor
+    (6) factor -> . LPAREN expr RPAREN
+    (7) factor -> . BOOLEAN
+
+    NOT             shift and go to state 3
+    LPAREN          shift and go to state 5
+    BOOLEAN         shift and go to state 6
+
+    term                           shift and go to state 12
+    factor                         shift and go to state 4
+
+state 9
+
+    (3) term -> NOT factor .
+
+    OR              reduce using rule 3 (term -> NOT factor .)
+    AND             reduce using rule 3 (term -> NOT factor .)
+    $end            reduce using rule 3 (term -> NOT factor .)
+    RPAREN          reduce using rule 3 (term -> NOT factor .)
+
+
+state 10
+
+    (6) factor -> LPAREN expr . RPAREN
+    (1) expr -> expr . OR term
+    (2) expr -> expr . AND term
+
+    RPAREN          shift and go to state 13
+    OR              shift and go to state 7
+    AND             shift and go to state 8
+
+
+state 11
+
+    (1) expr -> expr OR term .
+
+    OR              reduce using rule 1 (expr -> expr OR term .)
+    AND             reduce using rule 1 (expr -> expr OR term .)
+    $end            reduce using rule 1 (expr -> expr OR term .)
+    RPAREN          reduce using rule 1 (expr -> expr OR term .)
+
+
+state 12
+
+    (2) expr -> expr AND term .
+
+    OR              reduce using rule 2 (expr -> expr AND term .)
+    AND             reduce using rule 2 (expr -> expr AND term .)
+    $end            reduce using rule 2 (expr -> expr AND term .)
+    RPAREN          reduce using rule 2 (expr -> expr AND term .)
+
+
+state 13
+
+    (6) factor -> LPAREN expr RPAREN .
+
+    OR              reduce using rule 6 (factor -> LPAREN expr RPAREN .)
+    AND             reduce using rule 6 (factor -> LPAREN expr RPAREN .)
+    $end            reduce using rule 6 (factor -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 6 (factor -> LPAREN expr RPAREN .)
+
