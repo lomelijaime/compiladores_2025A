@@ -1,0 +1,594 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expr
+Rule 1     expr -> expr PLUS term
+Rule 2     expr -> expr MINUS term
+Rule 3     expr -> term
+Rule 4     term -> term TIMES factor
+Rule 5     term -> term DIVIDE factor
+Rule 6     term -> factor
+Rule 7     factor -> NUMBER
+Rule 8     factor -> LPAREN expr RPAREN
+Rule 9     factor -> expr_logica
+Rule 10    expr_logica -> expr_logica OR term_logica
+Rule 11    expr_logica -> expr_logica AND term_logica
+Rule 12    expr_logica -> term_logica
+Rule 13    term_logica -> NOT factor_logico
+Rule 14    term_logica -> factor_logico
+Rule 15    factor_logico -> BOOLEAN
+Rule 16    factor_logico -> NUMBER
+Rule 17    factor_logico -> LPAREN expr_logica RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 11
+BOOLEAN              : 15
+DIVIDE               : 5
+LPAREN               : 8 17
+MINUS                : 2
+NOT                  : 13
+NUMBER               : 7 16
+OR                   : 10
+PLUS                 : 1
+RPAREN               : 8 17
+TIMES                : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+expr                 : 1 2 8 0
+expr_logica          : 9 10 11 17
+factor               : 4 5 6
+factor_logico        : 13 14
+term                 : 1 2 3 4 5
+term_logica          : 10 11 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expr
+    (1) expr -> . expr PLUS term
+    (2) expr -> . expr MINUS term
+    (3) expr -> . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . LPAREN expr RPAREN
+    (9) factor -> . expr_logica
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NUMBER          shift and go to state 4
+    LPAREN          shift and go to state 5
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+
+    expr                           shift and go to state 1
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    expr_logica                    shift and go to state 6
+    term_logica                    shift and go to state 7
+    factor_logico                  shift and go to state 9
+
+state 1
+
+    (0) S' -> expr .
+    (1) expr -> expr . PLUS term
+    (2) expr -> expr . MINUS term
+
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+
+
+state 2
+
+    (3) expr -> term .
+    (4) term -> term . TIMES factor
+    (5) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 3 (expr -> term .)
+    MINUS           reduce using rule 3 (expr -> term .)
+    $end            reduce using rule 3 (expr -> term .)
+    RPAREN          reduce using rule 3 (expr -> term .)
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+
+
+state 3
+
+    (6) term -> factor .
+
+    TIMES           reduce using rule 6 (term -> factor .)
+    DIVIDE          reduce using rule 6 (term -> factor .)
+    PLUS            reduce using rule 6 (term -> factor .)
+    MINUS           reduce using rule 6 (term -> factor .)
+    $end            reduce using rule 6 (term -> factor .)
+    RPAREN          reduce using rule 6 (term -> factor .)
+
+
+state 4
+
+    (7) factor -> NUMBER .
+    (16) factor_logico -> NUMBER .
+
+  ! reduce/reduce conflict for TIMES resolved using rule 7 (factor -> NUMBER .)
+  ! reduce/reduce conflict for DIVIDE resolved using rule 7 (factor -> NUMBER .)
+  ! reduce/reduce conflict for PLUS resolved using rule 7 (factor -> NUMBER .)
+  ! reduce/reduce conflict for MINUS resolved using rule 7 (factor -> NUMBER .)
+  ! reduce/reduce conflict for $end resolved using rule 7 (factor -> NUMBER .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 7 (factor -> NUMBER .)
+    TIMES           reduce using rule 7 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 7 (factor -> NUMBER .)
+    PLUS            reduce using rule 7 (factor -> NUMBER .)
+    MINUS           reduce using rule 7 (factor -> NUMBER .)
+    $end            reduce using rule 7 (factor -> NUMBER .)
+    RPAREN          reduce using rule 7 (factor -> NUMBER .)
+    OR              reduce using rule 16 (factor_logico -> NUMBER .)
+    AND             reduce using rule 16 (factor_logico -> NUMBER .)
+
+  ! TIMES           [ reduce using rule 16 (factor_logico -> NUMBER .) ]
+  ! DIVIDE          [ reduce using rule 16 (factor_logico -> NUMBER .) ]
+  ! PLUS            [ reduce using rule 16 (factor_logico -> NUMBER .) ]
+  ! MINUS           [ reduce using rule 16 (factor_logico -> NUMBER .) ]
+  ! $end            [ reduce using rule 16 (factor_logico -> NUMBER .) ]
+  ! RPAREN          [ reduce using rule 16 (factor_logico -> NUMBER .) ]
+
+
+state 5
+
+    (8) factor -> LPAREN . expr RPAREN
+    (17) factor_logico -> LPAREN . expr_logica RPAREN
+    (1) expr -> . expr PLUS term
+    (2) expr -> . expr MINUS term
+    (3) expr -> . term
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (7) factor -> . NUMBER
+    (8) factor -> . LPAREN expr RPAREN
+    (9) factor -> . expr_logica
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NOT             shift and go to state 8
+    NUMBER          shift and go to state 4
+    LPAREN          shift and go to state 5
+    BOOLEAN         shift and go to state 10
+
+    expr                           shift and go to state 15
+    expr_logica                    shift and go to state 16
+    term                           shift and go to state 2
+    term_logica                    shift and go to state 7
+    factor                         shift and go to state 3
+    factor_logico                  shift and go to state 9
+
+state 6
+
+    (9) factor -> expr_logica .
+    (10) expr_logica -> expr_logica . OR term_logica
+    (11) expr_logica -> expr_logica . AND term_logica
+
+    TIMES           reduce using rule 9 (factor -> expr_logica .)
+    DIVIDE          reduce using rule 9 (factor -> expr_logica .)
+    PLUS            reduce using rule 9 (factor -> expr_logica .)
+    MINUS           reduce using rule 9 (factor -> expr_logica .)
+    $end            reduce using rule 9 (factor -> expr_logica .)
+    RPAREN          reduce using rule 9 (factor -> expr_logica .)
+    OR              shift and go to state 17
+    AND             shift and go to state 18
+
+
+state 7
+
+    (12) expr_logica -> term_logica .
+
+    OR              reduce using rule 12 (expr_logica -> term_logica .)
+    AND             reduce using rule 12 (expr_logica -> term_logica .)
+    TIMES           reduce using rule 12 (expr_logica -> term_logica .)
+    DIVIDE          reduce using rule 12 (expr_logica -> term_logica .)
+    PLUS            reduce using rule 12 (expr_logica -> term_logica .)
+    MINUS           reduce using rule 12 (expr_logica -> term_logica .)
+    $end            reduce using rule 12 (expr_logica -> term_logica .)
+    RPAREN          reduce using rule 12 (expr_logica -> term_logica .)
+
+
+state 8
+
+    (13) term_logica -> NOT . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    BOOLEAN         shift and go to state 10
+    NUMBER          shift and go to state 20
+    LPAREN          shift and go to state 21
+
+    factor_logico                  shift and go to state 19
+
+state 9
+
+    (14) term_logica -> factor_logico .
+
+    OR              reduce using rule 14 (term_logica -> factor_logico .)
+    AND             reduce using rule 14 (term_logica -> factor_logico .)
+    TIMES           reduce using rule 14 (term_logica -> factor_logico .)
+    DIVIDE          reduce using rule 14 (term_logica -> factor_logico .)
+    PLUS            reduce using rule 14 (term_logica -> factor_logico .)
+    MINUS           reduce using rule 14 (term_logica -> factor_logico .)
+    $end            reduce using rule 14 (term_logica -> factor_logico .)
+    RPAREN          reduce using rule 14 (term_logica -> factor_logico .)
+
+
+state 10
+
+    (15) factor_logico -> BOOLEAN .
+
+    OR              reduce using rule 15 (factor_logico -> BOOLEAN .)
+    AND             reduce using rule 15 (factor_logico -> BOOLEAN .)
+    TIMES           reduce using rule 15 (factor_logico -> BOOLEAN .)
+    DIVIDE          reduce using rule 15 (factor_logico -> BOOLEAN .)
+    PLUS            reduce using rule 15 (factor_logico -> BOOLEAN .)
+    MINUS           reduce using rule 15 (factor_logico -> BOOLEAN .)
+    $end            reduce using rule 15 (factor_logico -> BOOLEAN .)
+    RPAREN          reduce using rule 15 (factor_logico -> BOOLEAN .)
+
+
+state 11
+
+    (1) expr -> expr PLUS . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . LPAREN expr RPAREN
+    (9) factor -> . expr_logica
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NUMBER          shift and go to state 4
+    LPAREN          shift and go to state 5
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+
+    term                           shift and go to state 22
+    factor                         shift and go to state 3
+    expr_logica                    shift and go to state 6
+    term_logica                    shift and go to state 7
+    factor_logico                  shift and go to state 9
+
+state 12
+
+    (2) expr -> expr MINUS . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . LPAREN expr RPAREN
+    (9) factor -> . expr_logica
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NUMBER          shift and go to state 4
+    LPAREN          shift and go to state 5
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+
+    term                           shift and go to state 23
+    factor                         shift and go to state 3
+    expr_logica                    shift and go to state 6
+    term_logica                    shift and go to state 7
+    factor_logico                  shift and go to state 9
+
+state 13
+
+    (4) term -> term TIMES . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . LPAREN expr RPAREN
+    (9) factor -> . expr_logica
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NUMBER          shift and go to state 4
+    LPAREN          shift and go to state 5
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+
+    factor                         shift and go to state 24
+    expr_logica                    shift and go to state 6
+    term_logica                    shift and go to state 7
+    factor_logico                  shift and go to state 9
+
+state 14
+
+    (5) term -> term DIVIDE . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . LPAREN expr RPAREN
+    (9) factor -> . expr_logica
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NUMBER          shift and go to state 4
+    LPAREN          shift and go to state 5
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+
+    factor                         shift and go to state 25
+    expr_logica                    shift and go to state 6
+    term_logica                    shift and go to state 7
+    factor_logico                  shift and go to state 9
+
+state 15
+
+    (8) factor -> LPAREN expr . RPAREN
+    (1) expr -> expr . PLUS term
+    (2) expr -> expr . MINUS term
+
+    RPAREN          shift and go to state 26
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+
+
+state 16
+
+    (17) factor_logico -> LPAREN expr_logica . RPAREN
+    (10) expr_logica -> expr_logica . OR term_logica
+    (11) expr_logica -> expr_logica . AND term_logica
+    (9) factor -> expr_logica .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 27
+    OR              shift and go to state 17
+    AND             shift and go to state 18
+    TIMES           reduce using rule 9 (factor -> expr_logica .)
+    DIVIDE          reduce using rule 9 (factor -> expr_logica .)
+    PLUS            reduce using rule 9 (factor -> expr_logica .)
+    MINUS           reduce using rule 9 (factor -> expr_logica .)
+
+  ! RPAREN          [ reduce using rule 9 (factor -> expr_logica .) ]
+
+
+state 17
+
+    (10) expr_logica -> expr_logica OR . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+    NUMBER          shift and go to state 20
+    LPAREN          shift and go to state 21
+
+    term_logica                    shift and go to state 28
+    factor_logico                  shift and go to state 9
+
+state 18
+
+    (11) expr_logica -> expr_logica AND . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+    NUMBER          shift and go to state 20
+    LPAREN          shift and go to state 21
+
+    term_logica                    shift and go to state 29
+    factor_logico                  shift and go to state 9
+
+state 19
+
+    (13) term_logica -> NOT factor_logico .
+
+    OR              reduce using rule 13 (term_logica -> NOT factor_logico .)
+    AND             reduce using rule 13 (term_logica -> NOT factor_logico .)
+    TIMES           reduce using rule 13 (term_logica -> NOT factor_logico .)
+    DIVIDE          reduce using rule 13 (term_logica -> NOT factor_logico .)
+    PLUS            reduce using rule 13 (term_logica -> NOT factor_logico .)
+    MINUS           reduce using rule 13 (term_logica -> NOT factor_logico .)
+    $end            reduce using rule 13 (term_logica -> NOT factor_logico .)
+    RPAREN          reduce using rule 13 (term_logica -> NOT factor_logico .)
+
+
+state 20
+
+    (16) factor_logico -> NUMBER .
+
+    OR              reduce using rule 16 (factor_logico -> NUMBER .)
+    AND             reduce using rule 16 (factor_logico -> NUMBER .)
+    TIMES           reduce using rule 16 (factor_logico -> NUMBER .)
+    DIVIDE          reduce using rule 16 (factor_logico -> NUMBER .)
+    PLUS            reduce using rule 16 (factor_logico -> NUMBER .)
+    MINUS           reduce using rule 16 (factor_logico -> NUMBER .)
+    $end            reduce using rule 16 (factor_logico -> NUMBER .)
+    RPAREN          reduce using rule 16 (factor_logico -> NUMBER .)
+
+
+state 21
+
+    (17) factor_logico -> LPAREN . expr_logica RPAREN
+    (10) expr_logica -> . expr_logica OR term_logica
+    (11) expr_logica -> . expr_logica AND term_logica
+    (12) expr_logica -> . term_logica
+    (13) term_logica -> . NOT factor_logico
+    (14) term_logica -> . factor_logico
+    (15) factor_logico -> . BOOLEAN
+    (16) factor_logico -> . NUMBER
+    (17) factor_logico -> . LPAREN expr_logica RPAREN
+
+    NOT             shift and go to state 8
+    BOOLEAN         shift and go to state 10
+    NUMBER          shift and go to state 20
+    LPAREN          shift and go to state 21
+
+    expr_logica                    shift and go to state 30
+    term_logica                    shift and go to state 7
+    factor_logico                  shift and go to state 9
+
+state 22
+
+    (1) expr -> expr PLUS term .
+    (4) term -> term . TIMES factor
+    (5) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 1 (expr -> expr PLUS term .)
+    MINUS           reduce using rule 1 (expr -> expr PLUS term .)
+    $end            reduce using rule 1 (expr -> expr PLUS term .)
+    RPAREN          reduce using rule 1 (expr -> expr PLUS term .)
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+
+
+state 23
+
+    (2) expr -> expr MINUS term .
+    (4) term -> term . TIMES factor
+    (5) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 2 (expr -> expr MINUS term .)
+    MINUS           reduce using rule 2 (expr -> expr MINUS term .)
+    $end            reduce using rule 2 (expr -> expr MINUS term .)
+    RPAREN          reduce using rule 2 (expr -> expr MINUS term .)
+    TIMES           shift and go to state 13
+    DIVIDE          shift and go to state 14
+
+
+state 24
+
+    (4) term -> term TIMES factor .
+
+    TIMES           reduce using rule 4 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 4 (term -> term TIMES factor .)
+    PLUS            reduce using rule 4 (term -> term TIMES factor .)
+    MINUS           reduce using rule 4 (term -> term TIMES factor .)
+    $end            reduce using rule 4 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 4 (term -> term TIMES factor .)
+
+
+state 25
+
+    (5) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 5 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 5 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 5 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 5 (term -> term DIVIDE factor .)
+    $end            reduce using rule 5 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 5 (term -> term DIVIDE factor .)
+
+
+state 26
+
+    (8) factor -> LPAREN expr RPAREN .
+
+    TIMES           reduce using rule 8 (factor -> LPAREN expr RPAREN .)
+    DIVIDE          reduce using rule 8 (factor -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 8 (factor -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 8 (factor -> LPAREN expr RPAREN .)
+    $end            reduce using rule 8 (factor -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 8 (factor -> LPAREN expr RPAREN .)
+
+
+state 27
+
+    (17) factor_logico -> LPAREN expr_logica RPAREN .
+
+    OR              reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    AND             reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    TIMES           reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    DIVIDE          reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    PLUS            reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    MINUS           reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    $end            reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+    RPAREN          reduce using rule 17 (factor_logico -> LPAREN expr_logica RPAREN .)
+
+
+state 28
+
+    (10) expr_logica -> expr_logica OR term_logica .
+
+    OR              reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    AND             reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    TIMES           reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    DIVIDE          reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    PLUS            reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    MINUS           reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    $end            reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+    RPAREN          reduce using rule 10 (expr_logica -> expr_logica OR term_logica .)
+
+
+state 29
+
+    (11) expr_logica -> expr_logica AND term_logica .
+
+    OR              reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    AND             reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    TIMES           reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    DIVIDE          reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    PLUS            reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    MINUS           reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    $end            reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+    RPAREN          reduce using rule 11 (expr_logica -> expr_logica AND term_logica .)
+
+
+state 30
+
+    (17) factor_logico -> LPAREN expr_logica . RPAREN
+    (10) expr_logica -> expr_logica . OR term_logica
+    (11) expr_logica -> expr_logica . AND term_logica
+
+    RPAREN          shift and go to state 27
+    OR              shift and go to state 17
+    AND             shift and go to state 18
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for RPAREN in state 16 resolved as shift
+WARNING: reduce/reduce conflict in state 4 resolved using rule (factor -> NUMBER)
+WARNING: rejected rule (factor_logico -> NUMBER) in state 4
