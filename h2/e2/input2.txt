@@ -1,0 +1,9 @@
+int main() {
+    // Este es un comentario de una línea
+    int x = 123;
+    /* Este es un
+    comentario de
+    múltiples líneas */
+    char* mensaje = "Hola \"mundo\"";
+    return 0;
+}
